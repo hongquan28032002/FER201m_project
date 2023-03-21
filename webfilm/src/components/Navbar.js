@@ -12,10 +12,11 @@ function Navbar() {
     const handleSearch = (e) => {
         e.preventDefault()
         const searchVal = searchinput.current.value;
-        const searchResult = allfilms.filter(s => s.name.toLowerCase().includes(searchVal.toLowerCase()));
-        setFilteredFilm(searchResult);
-        console.log(searchResult);
-
+        if(!searchVal){
+            alert("Please enter a valid search");
+        }else if(searchVal){
+        window.location.href = `/search/${searchVal}`
+        }
     };
 
     return (
