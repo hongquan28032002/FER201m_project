@@ -6,14 +6,12 @@ import { createBrowserHistory } from 'history';
 
 function Films() {
 
-
+    const navigate = useNavigate()
     const history = createBrowserHistory();
     const { allfilms } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
     console.log(allfilms);
-    // const [categgory, setCategory] = useState([{
-    //     albumId: 0
-    // }])
+    
 
     const { catename } = useParams();
     const { filteredFilm } = useContext(UserContent)
@@ -41,8 +39,7 @@ function Films() {
     }, []);
 
 
-    //    console.log(Catename);
-    ////////////////////////////////////////////////////////
+    
 
     const filter = (name) => {
 
@@ -51,20 +48,9 @@ function Films() {
     }
 
 
-    // const handleSearch = () => {
-    //     const searchVal = search.current.value;
-    //     const searchResult = photos.filter(s => s.title.toLowerCase().startsWith(searchVal.toLowerCase()));
-    //     setFilteredPhotos(searchResult);
-    //     console.log(searchResult);
-
-    // };
 
 
 
-    // const handleLogout = () => {
-    //     setUser({})
-    //     setLogin(false)
-    // }
 
     return (
 
@@ -72,29 +58,15 @@ function Films() {
 
         <div class="row mb-5">
 
-            {/* <div class="row">
-                <div class="col-12 text-center row background-image">
-                    <div class="col-9 align-self-center">
-                        <input ref={search} />&nbsp;
-                        <button class="btn-light" onClick={handleSearch}>Search</button>
-                    </div>
-                    <div class="col-3">
-
-                        <h5>{user.email}</h5>
-                        <p><button class="btn btn-primary" onClick={handleLogout}>Log out</button></p>
-                        <div class="mt-4 mb-2">
-                            <button class="btn btn-success" onClick={() => navigate('/create')}>Add new</button>
-                        </div></div>
-
-                </div> */}
+           
 
             <div class="col-2 card ">
                 <h2 class='btn btn-success mt-5 mb-2' onClick={() => filter("all")}>All</h2>
-                <div class="row">
+                <div class="row justify-content-center">
       
                     {CatenameID.map((category) => (
-                        <div class="col-6 mb-4 text-center">
-                            <div class='btn btn-outline-success border-success rounded-circle' onClick={() => filter(category)}>{category}</div>
+                        <div class="col-8 mb-4 ">
+                            <div class='btn btn-outline-success col-12' onClick={() => filter(category)}>{category}</div>
                         </div>
                     ))}
                 </div>
@@ -107,7 +79,7 @@ function Films() {
                         <div class="row">
                             {filteredFilm.map((p) => (
                                 <div class="col-3 border-3  mb-5" style={{ width: '150x', height: '400px' }}>
-                                    <li class="card btn">
+                                    <li class="card btn" onClick={() => navigate(`/detail/${p.category}/${p.id}`)}>
                                         <img  src={require(`./images/${p.img}`)} width='100%' height={'200px'} alt="" />
                                         <br/>
                                         <p class="text-center" style={{ fontSize: '15px',fontWeight: 'bolder' }}>{p.name}</p>

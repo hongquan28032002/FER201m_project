@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate, useParams } fro
 import './bootstrap/dist/css/bootstrap.min.css'
 import Films from './components/Films';
 import data from './components/films.json'
+import Detail from './components/Detail';
+import Search from './components/Search';
 import './App.css';
 import Navbar from './components/Navbar';
 import { useState, createContext, useEffect } from 'react';
@@ -29,9 +31,12 @@ function App() {
              
             
             <Route path="/films/:catename" element={<Films />}></Route>
+            <Route path="/detail/:catename/:id" element={<Detail />}></Route>
+            <Route path="/search/:searchval" element={<Search />}></Route>
 
 
-          
+
+           
 
 
 
