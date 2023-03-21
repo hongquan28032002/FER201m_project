@@ -8,14 +8,19 @@ function Navbar() {
     const { filteredFilm } = useContext(UserContent)
     const { setFilteredFilm } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
+    const { status,setStatus } = useContext(UserContent)
+
 
     const handleSearch = (e) => {
-        e.preventDefault()
-        const searchVal = searchinput.current.value;
-        const searchResult = allfilms.filter(s => s.name.toLowerCase().includes(searchVal.toLowerCase()));
-        setFilteredFilm(searchResult);
-        console.log(searchResult);
+        e.preventDefault();
 
+        const searchinputValue = document.getElementById('searchitem').value; // use optional chaining to safely access value property
+        
+        if(!searchinputValue) {
+            alert('Please enter a search input value');
+        }else{
+        window.location.href = `/search/${searchinputValue}`; 
+        }
     };
 
     return (
@@ -30,10 +35,10 @@ function Navbar() {
                 </div>
                 <div class="col-6 row justify-content-end">
 
-                    <form class="form-inline my-2 my-lg-0">
+                    <form onSubmit={handleSearch} class="form-inline my-2 my-lg-0">
 
-                        <input class="form-control mr-sm-2" type="search" ref={searchinput} placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-light my-2 my-sm-0" onClick={handleSearch}>Search</button>
+                        <input class="form-control mr-sm-2" type="search" id='searchitem' placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-light my-2 my-sm-0" type='submit'>Search</button>
                     </form>
                 </div>
                 <div class="col-1 row justify-content-center">

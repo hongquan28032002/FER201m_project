@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate, useParams } fro
 import './bootstrap/dist/css/bootstrap.min.css'
 import Films from './components/Films';
 import data from './components/films.json'
+import Detail from './components/Detail';
 import './App.css';
+import Search from './components/Search';
 import Navbar from './components/Navbar';
 import { useState, createContext, useEffect } from 'react';
 export const UserContent = createContext()
@@ -16,24 +18,27 @@ function App() {
 
   const [allfilms, setAllfilms] = useState(data)
   const [filteredFilm, setFilteredFilm] = useState([]);
-  
+
 
 
   return (
     <div>
      
-      <UserContent.Provider value={{ filteredFilm, setFilteredFilm,allfilms, setAllfilms }}>
+      <UserContent.Provider value={{filteredFilm, setFilteredFilm,allfilms, setAllfilms }}>
       <Navbar />
         <Router>
           <Routes>
              
             
             <Route path="/films/:catename" element={<Films />}></Route>
+      
 
+            <Route path="/detail/:catename/:id" element={<Detail />}></Route>
 
+            <Route path="/search/:searchvalue" element={< Search />}></Route>
           
 
-
+              
 
             <Route path="*" element={<Error />}></Route>
           </Routes>
