@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -9,8 +10,26 @@ const Register = () => {
   });
   //tp store value in localstorage
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(input));
+
+    // Lấy danh sách người dùng từ local storage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Kiểm tra xem email đã tồn tại trong danh sách người dùng hay chưa
+    const emailExists = users.some((user) => user.email === input.email);
+
+    // Nếu email đã tồn tại, hiển thị thông báo lỗi
+    if (emailExists) {
+      setErrorMsg("Email already exists. Please choose another email.");
+      return;
+    }
+
+    // Nếu email không tồn tại, lưu thông tin người dùng mới vào local storage
+    users.push(input);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // Chuyển hướng đến trang đăng nhập
     navigate("/login");
   };
   return (
@@ -47,6 +66,7 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        placeholder="Enter name"
                         required
                       />
                     </div>
@@ -66,6 +86,7 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        placeholder="Enter email*"
                         required
                       />
                     </div>
@@ -85,9 +106,11 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        placeholder="Enter password*"
                         required
                       />
                     </div>
+                    {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
                     <div className="d-flex justify-content-center">
                       <button
                         type="submit"

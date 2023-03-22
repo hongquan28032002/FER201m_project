@@ -1,0 +1,6 @@
+[
+    {"id": 1 , "name": "Nguyễn Hồng Quân", "email":"Karley_Dach@jasper.info", "password":"123456", "role":0},
+    {"id": 2 , "name": "Vũ Minh Tú", "email":"Sincere@april.biz", "password":"123456", "role":0},
+    {"id": 3 , "name": "Lê Đức Mạnh", "email":"Romaguera-Crona", "password":"123456", "role":0},
+    {"id": 4 , "name": "Vũ Văn Hoàng", "email":"Nathan@yesenia.net", "password":"123456", "role":0}
+]

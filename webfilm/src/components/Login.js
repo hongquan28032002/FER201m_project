@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import data from "./User.json";
 const Login = () => {
   const navigate = useNavigate();
-  const [errorMsg1, setErrorMsg1] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg1, setErrorMsg1] = useState("");
+  const [members, setMembers] = useState(data);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -10,6 +13,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const loggedesuer = JSON.parse(localStorage.getItem("user"));
+    console.log(loggedesuer);
     if (
       input.email === loggedesuer.email &&
       input.password === loggedesuer.password
@@ -17,8 +21,7 @@ const Login = () => {
       localStorage.setItem("loggedin", true);
       navigate("/logout");
     } else {
-      //   alert("Wrong email or password!");
-      setErrorMsg1("Wrong email or password!");
+      setErrorMsg("Wrong email or password!");
     }
   };
 
@@ -30,7 +33,6 @@ const Login = () => {
           "url('https://st.quantrimang.com/photos/image/2020/07/14/Hinh-Nen-Nhe-Nhang-QTM-7.jpg')",
       }}
     >
-
       <div className="mask d-flex align-item-center h-100 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -41,7 +43,7 @@ const Login = () => {
                   <form onSubmit={handleLogin}>
                     <div className="form-outline mb-4">
                       <label className="form-label" htmlFor="form3Examplelcg">
-                        Your Email:
+                        Email:
                       </label>
                       <input
                         type="email"
@@ -55,6 +57,7 @@ const Login = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        placeholder="Enter email*"
                         required
                       />
                     </div>
@@ -74,10 +77,12 @@ const Login = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        placeholder="Enter password*"
                         required
                       />
                     </div>
-                    {errorMsg1 && <p style={{ color: "red" }}>{errorMsg1}</p>}
+                    {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
+                    {/* {errorMsg1 && <p style={{ color: "red" }}>{errorMsg1}</p>} */}
                     <div className="d-flex justify-content-center">
                       <button
                         type="submit"
