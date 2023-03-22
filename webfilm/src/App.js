@@ -1,26 +1,26 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-  useParams,
-  BrowserRouter,
-} from "react-router-dom";
-import "./bootstrap/dist/css/bootstrap.min.css";
-import Films from "./components/Films";
-import data from "./components/films.json";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useParams } from 'react-router-dom'
+import './bootstrap/dist/css/bootstrap.min.css'
+import Films from './components/Films';
+import data from './components/films.json'
+import Detail from './components/Detail';
+import Search from './components/Search';
 import Login from "./components/Login";
 import Register from "./components/Register.js";
 import Logout from "./components/Logout";
+import './App.css';
+import Navbar from './components/Navbar';
+import { useState, createContext, useEffect } from 'react';
+export const UserContent = createContext()
 
-import "./App.css";
-import Navbar from "./components/Navbar";
-import { useState, createContext, useEffect } from "react";
-export const UserContent = createContext();
+
+
 
 function App() {
-  const [allfilms, setAllfilms] = useState(data);
+
+
+
+  const [allfilms, setAllfilms] = useState(data)
+
   const [filteredFilm, setFilteredFilm] = useState([]);
 
   return (
@@ -36,6 +36,9 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/films/:catename" element={<Films />}></Route>
+            <Route path="/detail/:catename/:id" element={<Detail />}></Route>
+            <Route path="/search/:searchval" element={<Search />}></Route>
+
           </Routes>
         </Router>
 
