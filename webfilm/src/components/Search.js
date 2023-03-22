@@ -28,7 +28,13 @@ function Search() {
   const CatenameID = allfilms.reduce((aprev, anext) => {
     if (!aprev.includes(anext.category)) {
       aprev.push(anext.category);
-    }
+    }})
+  
+    const filter = (name) => {
+
+      name.includes("all") ? setFilteredFilm(allfilms) : setFilteredFilm(allfilms.filter((p) => p.category.includes(name)))
+      history.push("/films/" + name)
+  }
 
 
 

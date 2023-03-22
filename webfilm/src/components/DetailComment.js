@@ -16,34 +16,50 @@ export default function Detail() {
     const { allfilms } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
 
-
+    const refMark = useRef();
+    const refComment = useRef();
     const { catename } = useParams();
     const { id } = useParams();
+    const { email } = useParams();
     // console.log(catename);
 
 
     const film = allfilms.find(f => (f.category.includes(catename) && f.id === parseInt(id)));
     console.log(film.name);
-    const filmStoreTest = JSON.parse(localStorage.getItem("film"));
-    if(filmStoreTest == null){
-    localStorage.setItem("film", JSON.stringify(film));
-  }
-
-    const commentsSection = () => {
-      const currentUser = JSON.parse(localStorage.getItem("user"));
-      console.log(currentUser)
-      if(!currentUser){
-        window.confirm("Please login to continue");
-        navigate("/login");
-      }
-      else{
-        navigate("/detail/" + catename + "/" + id + "/" + currentUser.email);
-      }
-    }
     const filmStore = JSON.parse(localStorage.getItem("film"));
     console.log(filmStore)
     const filmComments = filmStore.comments;
     console.log(filmComments)
+    const addReview = () => {
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+        const existedCommentUser = filmComments.some(c => c.email == currentUser.email);
+        if(existedCommentUser){
+            var mark = refMark.current.value;
+            var comment = refComment.current.value;
+            filmStore = filmStore.map(f => {
+                if(existedCommentUser.email == f.email){
+                    return { ...f, mark, comment };
+                }
+            })
+            localStorage.setItem("film", JSON.stringify(filmStore));
+            // navigate("/detail/" + catename + "/" + id);
+        } 
+        else{
+            var mark = refMark.current.value;
+            var comment = refComment.current.value;
+            const newUserComment = {
+                name: currentUser.name,
+                email: currentUser.email, 
+                comment: comment, 
+                mark: mark
+            }
+            filmStore.comments.push(newUserComment);
+            localStorage.setItem("film", JSON.stringify(filmStore));
+            console.log(newUserComment);
+            // navigate("/detail/" + catename + "/" + id);
+        }
+    }
+
     return (
         <div >
           
@@ -56,8 +72,18 @@ export default function Detail() {
                 <p><span style={{fontWeight : "bolder"}}>Mark:</span>{film.mark}</p>
                 <p><span style={{fontWeight : "bolder"}}>Description:</span>{film.description}</p>
       
-                <button onClick={commentsSection} className='btn btn-success'>Vote</button><hr/>
-      
+                
+                <h1>Review Detail</h1>
+                <p><span>Mark:</span>
+                <input type="number" ref={refMark}/>
+                </p>
+                
+                <p><span>Comment:</span><br/>
+                <textarea rows="4" cols="50" ref={refComment}/>
+                </p>
+
+                <button onClick={addReview} className='btn btn-success'>Review</button><hr/>
+
                 <h1>Comments</h1>
                 {
                   filmComments.map(f => {
