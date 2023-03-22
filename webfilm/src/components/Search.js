@@ -5,26 +5,26 @@ import { createBrowserHistory } from 'history';
 
 
 function Search() {
+  const navigate = useNavigate();
+  const history = createBrowserHistory();
+  const { allfilms } = useContext(UserContent);
+  const { setAllfilms } = useContext(UserContent);
+  // console.log(allfilms);
 
-    const navigate = useNavigate()
-    const history = createBrowserHistory();
-    const { allfilms } = useContext(UserContent)
-    const { setAllfilms } = useContext(UserContent)
-    // console.log(allfilms);
-
-
-    const { searchval } = useParams();
-    const s = String(searchval)
-    console.log(s);
-    const { filteredFilm, setFilteredFilm } = useContext(UserContent)
-    useEffect((e) => {
-
-        setFilteredFilm(allfilms.filter((film) => film.name.toLowerCase().includes(s.toLowerCase())));
-
-    }, [allfilms]);
-
-
-
+  const { searchval } = useParams();
+  const s = String(searchval);
+  console.log(s);
+  const { filteredFilm, setFilteredFilm } = useContext(UserContent);
+  useEffect(
+    (e) => {
+      setFilteredFilm(
+        allfilms.filter((film) =>
+          film.name.toLowerCase().includes(s.toLowerCase())
+        )
+      );
+    },
+    [allfilms]
+  );
 
 
 
