@@ -25,7 +25,17 @@ export default function Detail() {
     const film = allfilms.find(f => (f.category.includes(catename) && f.id === parseInt(id)));
     console.log(film.name);
 
-
+    const commentsSection = () => {
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+      console.log(currentUser)
+      if(!currentUser){
+        window.confirm("Please login to continue");
+        navigate("/login");
+      }
+      else{
+        navigate("/films/" + catename + "/" + id + "/" + currentUser.email);
+      }
+    }
     return (
         <div >
           
@@ -38,7 +48,7 @@ export default function Detail() {
                 <p><span style={{fontWeight : "bolder"}}>Mark:</span>{film.mark}</p>
                 <p><span style={{fontWeight : "bolder"}}>Description:</span>{film.description}</p>
       
-                <button className='btn btn-success'>Vote</button><hr/>
+                <button onClick={commentsSection} className='btn btn-success'>Vote</button><hr/>
       
                 <h1>Comments</h1>
       
@@ -48,6 +58,3 @@ export default function Detail() {
         </div>
       );
 }
-
-
-
