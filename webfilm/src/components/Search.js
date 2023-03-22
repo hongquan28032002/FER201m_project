@@ -1,49 +1,35 @@
-import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom'
-import { useState, useEffect, useContext, useRef } from 'react'
-import { UserContent } from '../App'
-import { createBrowserHistory } from 'history';
-
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useContext, useRef } from "react";
+import { UserContent } from "../App";
+import { createBrowserHistory } from "history";
 
 function Search() {
+  const navigate = useNavigate();
+  const history = createBrowserHistory();
+  const { allfilms } = useContext(UserContent);
+  const { setAllfilms } = useContext(UserContent);
+  // console.log(allfilms);
 
-    const navigate = useNavigate()
-    const history = createBrowserHistory();
-    const { allfilms } = useContext(UserContent)
-    const { setAllfilms } = useContext(UserContent)
-    // console.log(allfilms);
+  const { searchval } = useParams();
+  const s = String(searchval);
+  console.log(s);
+  const { filteredFilm, setFilteredFilm } = useContext(UserContent);
+  useEffect(
+    (e) => {
+      setFilteredFilm(
+        allfilms.filter((film) =>
+          film.name.toLowerCase().includes(s.toLowerCase())
+        )
+      );
+    },
+    [allfilms]
+  );
 
-
-    const { searchval } = useParams();
-    const s = String(searchval)
-    console.log(s);
-    const { filteredFilm, setFilteredFilm } = useContext(UserContent)
-    useEffect((e) => {
-
-        setFilteredFilm(allfilms.filter((film) => film.name.toLowerCase().includes(s.toLowerCase())));
-
-    }, [allfilms]);
-
-
-
-
-
-
-    const CatenameID = allfilms.reduce((aprev, anext) => {
-
-        if (!aprev.includes(anext.category)) {
-            aprev.push(anext.category);
-        }
-        return aprev;
-    }, []);
-
-
-
-
-    const filter = (name) => {
-
-        name.includes("all") ? setFilteredFilm(allfilms) : setFilteredFilm(allfilms.filter((p) => p.category.includes(name)))
-        history.push("/films/" + name)
+  const CatenameID = allfilms.reduce((aprev, anext) => {
+    if (!aprev.includes(anext.category)) {
+      aprev.push(anext.category);
     }
+
 
 
 
@@ -98,8 +84,7 @@ function Search() {
 
 
     )
+
 }
-
-
 
 export default Search;
