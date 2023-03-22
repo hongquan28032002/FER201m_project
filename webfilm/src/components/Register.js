@@ -32,6 +32,9 @@ const Register = () => {
                   </h2>
                   <form onSubmit={handleSubmit}>
                     <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form3Examplelcg">
+                        Your full name:
+                      </label>
                       <input
                         type="text"
                         name="name"
@@ -44,12 +47,13 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        required
                       />
-                      <label className="form-label" htmlFor="form3Examplelcg">
-                        Your Name
-                      </label>
                     </div>
                     <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form3Examplelcg">
+                        Your email:
+                      </label>
                       <input
                         type="email"
                         name="email"
@@ -62,12 +66,13 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        required
                       />
-                      <label className="form-label" htmlFor="form3Examplelcg">
-                        Your Email
-                      </label>
                     </div>
                     <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form3Examplelcg">
+                        Your password:
+                      </label>
                       <input
                         type="password"
                         name="password"
@@ -80,10 +85,8 @@ const Register = () => {
                         }
                         id="form3Examplelcg"
                         className="form-control form-control-lg"
+                        required
                       />
-                      <label className="form-label" htmlFor="form3Examplelcg">
-                        Your Password
-                      </label>
                     </div>
                     <div className="d-flex justify-content-center">
                       <button
@@ -94,7 +97,7 @@ const Register = () => {
                       </button>
                     </div>
                     <p className="text-center text-muted mt-5 mb-0">
-                      Have already an account?
+                      You already have an account?
                       <a href="/login" className="fw-bold text-body">
                         <u>Login here</u>
                       </a>

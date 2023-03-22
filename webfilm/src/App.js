@@ -12,7 +12,7 @@ import Films from "./components/Films";
 import data from "./components/films.json";
 import Login from "./components/Login";
 import Register from "./components/Register.js";
-import Home from "./components/Home";
+import Logout from "./components/Logout";
 
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -34,11 +34,11 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
-            <Route path="/home" element={<Home />}></Route>
+            <Route path="/logout" element={<Logout />}></Route>
             <Route path="/films/:catename" element={<Films />}></Route>
           </Routes>
         </Router>
-        
+
       </UserContent.Provider>
     </div>
   );
