@@ -79,11 +79,11 @@ function Search() {
                                 <li class="card btn" onClick={() => navigate(`/detail/${p.category}/${p.id}`)}>
                                     <img src={require(`./images/${p.img}`)} width='100%' height={'200px'} alt="" />
                                     <br />
-                                    <p class="text-center" style={{ fontSize: '15px', fontWeight: 'bolder' }}>{p.name}</p>
+                                    <p class="text-center" style={{ fontSize: '12px', fontWeight: 'bolder' }}>{p.name}</p>
 
-                                    <p style={{ fontSize: '12px', fontWeight: 'bolder' }}>Public year : {p.publicdate}</p>
-                                    <p style={{ fontSize: '12px', fontWeight: 'bolder' }}>Category : {p.category}</p>
-                                    <p style={{ fontSize: '12px', fontWeight: 'bolder' }}>Vote Rate : {p.mark}</p>
+                                    <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Public year : {p.publicdate}</p>
+                                    <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Category : {p.category}</p>
+                                    <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Vote Rate : {p.mark}</p>
                                     <p class="btn btn-success" style={{ fontSize: '12px', fontWeight: 'bolder' }}>VOTE</p>
                                 </li>
                             </div>

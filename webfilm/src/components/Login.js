@@ -1,41 +1,68 @@
-import React, { useState } from "react";
+import React, { useState , useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import data from "./User.json";
+import { UserContent } from '../App'
+import dataUser from "./User.json";
 const Login = () => {
   const navigate = useNavigate();
+  const {status, setStatus} = useContext(UserContent)
+
+  
   const [errorMsg, setErrorMsg] = useState("");
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const loggedesuer = JSON.parse(localStorage.getItem("user"));
-    console.log(localStorage.getItem("user"));
-    if (loggedesuer && loggedesuer.email && loggedesuer.password) {
-      if (
-        input.email === loggedesuer.email &&
-        input.password === loggedesuer.password
-      ) {
-        localStorage.setItem("loggedin", true);
-        navigate("/logout");
-      } else {
-        setErrorMsg("Wrong email or password!");
-      }
-    } else {
-      setErrorMsg("User not found!");
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedin")) {
+      navigate("/films/all");
     }
+  }, [navigate]);
+  
+
+  const handleLogin = (e) => {
+    
+    e.preventDefault();
+    const loggedesuer = JSON.parse(localStorage.getItem("users"));
+    if(loggedesuer){
+    console.log(localStorage.getItem("users"));
+    for (let index = 0; index < loggedesuer.length; index++) {
+      const element = loggedesuer[index];
+      
+      if (element && element.email && element.password) {
+        if (
+          input.email === element.email &&
+          input.password === element.password
+        ) {
+          localStorage.setItem("loggedin", true);
+          localStorage.setItem("user", JSON.stringify(element));
+          window.location.href = 'films/all'
+          return;
+        } else {
+          setErrorMsg("Wrong email or password!");
+        }
+      }
+    }
+    setErrorMsg("User not found!");
+  }else if(!loggedesuer){
+    alert("Account is not existed")
+  }
+  
   };
 
   return (
-    <section
-      className="vh-100 bg-image"
-      style={{
-        backgroundImage:
-          "url('https://st.quantrimang.com/photos/image/2020/07/14/Hinh-Nen-Nhe-Nhang-QTM-7.jpg')",
-      }}
-    >
-      <div className="mask d-flex align-item-center h-100 gradient-custom-3">
+    <div className="mt-5" style={{
+      backgroundSize: 'cover',
+      width : '100%',
+      backgroundImage:
+        "url('https://st.quantrimang.com/photos/image/2020/07/14/Hinh-Nen-Nhe-Nhang-QTM-7.jpg')",
+      position: 'fixed',
+      top: 15,
+      left: 0,
+      height: '100vh'
+    }}>
+   
+      <div className="mask d-flex align-item-center mt-5 h-80 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -106,7 +133,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </section>
+
+    </div>
   );
 };
 
