@@ -17,17 +17,7 @@ function App() {
 
 
   const [allfilms, setAllfilms] = useState(data)
-  const filmm = {
-    id: 17,
-    img: "image001_11.jpg",
-    category: "Action",
-    description: "'Spider-Man: No Way Home' follows Peter Parker as he navigates a multiverse filled with familiar villains and alternate Spider-Men.",
-    name: "Spiderman noway home",
-    publicdate: 2021,
-    mark: "",
-    comments: []
-}
-   data.push(filmm)
+
   const [filteredFilm, setFilteredFilm] = useState([]);
   
 
@@ -45,13 +35,6 @@ function App() {
             <Route path="/detail/:catename/:id" element={<Detail />}></Route>
             <Route path="/search/:searchval" element={<Search />}></Route>
 
-
-
-           
-
-
-
-            <Route path="*" element={<Error />}></Route>
           </Routes>
         </Router>
       </UserContent.Provider>
