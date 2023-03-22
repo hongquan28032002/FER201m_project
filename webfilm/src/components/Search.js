@@ -5,12 +5,23 @@ import { createBrowserHistory } from 'history';
 
 
 function Search() {
-
+    // const [average, setAverage] = useState(0)
     const navigate = useNavigate()
     const history = createBrowserHistory();
     const { allfilms } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
     // console.log(allfilms);
+
+
+    // let averageValue = 0;
+    // if(localStorage.getItem(`${id}`)){
+    //  averageValue = parseFloat(JSON.parse(localStorage.getItem(`${id}`)).toFixed(1));
+    
+    // }else{
+    //   averageValue = 0
+    // }
+
+
 
 
     const { searchval } = useParams();
@@ -83,7 +94,7 @@ function Search() {
 
                                     <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Public year : {p.publicdate}</p>
                                     <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Category : {p.category}</p>
-                                    <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Vote Rate : {p.mark}</p>
+                                    <p style={{ fontSize: '10px', fontWeight: 'bolder' }}>Vote Rate :{parseFloat(JSON.parse(localStorage.getItem(`${p.id}`)))  ? (parseFloat(JSON.parse(localStorage.getItem(`${p.id}`))).toFixed(1)) : "0" }</p>
                                     <p class="btn btn-success" style={{ fontSize: '12px', fontWeight: 'bolder' }}>VOTE</p>
                                 </li>
                             </div>

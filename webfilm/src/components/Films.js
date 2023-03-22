@@ -87,7 +87,7 @@ function Films() {
                                       
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Public year : {p.publicdate}</p>
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Category : {p.category}</p>
-                                        <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Vote Rate : {p.mark}</p>
+                                        <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Vote Rate : {parseFloat(JSON.parse(localStorage.getItem(`${p.id}`)))  ? (parseFloat(JSON.parse(localStorage.getItem(`${p.id}`))).toFixed(1)) : "0" }</p>
                                         <p class="btn btn-success" style={{ fontSize: '12px',fontWeight: 'bolder'  }}>VOTE</p>
                                     </li>
                                 </div>

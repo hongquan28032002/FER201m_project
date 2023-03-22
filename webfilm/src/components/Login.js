@@ -21,7 +21,7 @@ const Login = () => {
   
 
   const handleLogin = (e) => {
-    
+    let count = 0;
     e.preventDefault();
     const loggedesuer = JSON.parse(localStorage.getItem("users"));
     if(loggedesuer){
@@ -34,16 +34,19 @@ const Login = () => {
           input.email === element.email &&
           input.password === element.password
         ) {
+          count=0;
           localStorage.setItem("loggedin", true);
           localStorage.setItem("user", JSON.stringify(element));
           window.location.href = 'films/all'
           return;
         } else {
-          setErrorMsg("Wrong email or password!");
+          count++;
         }
       }
     }
-    setErrorMsg("User not found!");
+    if(count >0 ){
+    setErrorMsg("Wrong username or pass word!");
+    }
   }else if(!loggedesuer){
     alert("Account is not existed")
   }
