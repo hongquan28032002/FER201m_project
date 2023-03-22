@@ -10,25 +10,20 @@ const Register = () => {
   });
   //tp store value in localstorage
   const handleSubmit = (e) => {
-
     e.preventDefault();
-
     // Lấy danh sách người dùng từ local storage
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
     // Kiểm tra xem email đã tồn tại trong danh sách người dùng hay chưa
     const emailExists = users.some((user) => user.email === input.email);
-
     // Nếu email đã tồn tại, hiển thị thông báo lỗi
     if (emailExists) {
       setErrorMsg("Email already exists. Please choose another email.");
       return;
     }
-
     // Nếu email không tồn tại, lưu thông tin người dùng mới vào local storage
     users.push(input);
     localStorage.setItem("users", JSON.stringify(users));
-
+    localStorage.setItem("user", JSON.stringify(input));
     // Chuyển hướng đến trang đăng nhập
     navigate("/login");
   };

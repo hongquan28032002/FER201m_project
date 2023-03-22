@@ -4,8 +4,6 @@ import data from "./User.json";
 const Login = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
-  // const [errorMsg1, setErrorMsg1] = useState("");
-  const [members, setMembers] = useState(data);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -13,15 +11,19 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const loggedesuer = JSON.parse(localStorage.getItem("user"));
-    console.log(loggedesuer);
-    if (
-      input.email === loggedesuer.email &&
-      input.password === loggedesuer.password
-    ) {
-      localStorage.setItem("loggedin", true);
-      navigate("/logout");
+    console.log(localStorage.getItem("user"));
+    if (loggedesuer && loggedesuer.email && loggedesuer.password) {
+      if (
+        input.email === loggedesuer.email &&
+        input.password === loggedesuer.password
+      ) {
+        localStorage.setItem("loggedin", true);
+        navigate("/logout");
+      } else {
+        setErrorMsg("Wrong email or password!");
+      }
     } else {
-      setErrorMsg("Wrong email or password!");
+      setErrorMsg("User not found!");
     }
   };
 
