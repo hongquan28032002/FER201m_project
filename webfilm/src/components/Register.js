@@ -8,11 +8,15 @@ const Register = () => {
     email: "",
     password: "",
   });
-  //tp store value in localstorage
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     // Lấy danh sách người dùng từ local storage
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    // Kiểm tra nếu users không phải là một mảng, gán một mảng trống cho users
+    if (!Array.isArray(users)) {
+      users = [];
+    }
     // Kiểm tra xem email đã tồn tại trong danh sách người dùng hay chưa
     const emailExists = users.some((user) => user.email === input.email);
     // Nếu email đã tồn tại, hiển thị thông báo lỗi
@@ -24,18 +28,20 @@ const Register = () => {
     users.push(input);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(input));
-    // Chuyển hướng đến trang đăng nhập
     navigate("/login");
   };
   return (
-    <section
-      className="vh-100 bg-image"
-      style={{
-        backgroundImage:
-          "url('https://st.quantrimang.com/photos/image/2020/07/14/Hinh-Nen-Nhe-Nhang-QTM-7.jpg')",
-      }}
-    >
-      <div className="mask d-flex align-item-center h-100 gradient-custom-3">
+    <div className="mt-5 mb-5" style={{
+      backgroundSize: 'cover',
+      width : '100%',
+      backgroundImage:
+        "url('https://st.quantrimang.com/photos/image/2020/07/14/Hinh-Nen-Nhe-Nhang-QTM-7.jpg')",
+      position: 'fixed',
+      top: 15,
+      left: 0,
+      height: '100vh'
+    }}>
+      <div className="mask d-flex align-item-center mt-4 v-80 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -127,7 +133,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

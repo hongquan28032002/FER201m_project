@@ -5,7 +5,8 @@ import { createBrowserHistory } from 'history';
 
 
 function Films() {
-
+    const {status, setStatus} = useContext(UserContent)
+    console.log(status);
     const navigate = useNavigate()
     const history = createBrowserHistory();
     const { allfilms } = useContext(UserContent)
@@ -82,7 +83,7 @@ function Films() {
                                     <li class="card btn" onClick={() => navigate(`/detail/${p.category}/${p.id}`)}>
                                         <img  src={require(`./images/${p.img}`)} width='100%' height={'200px'} alt="" />
                                         <br/>
-                                        <p class="text-center" style={{ fontSize: '15px',fontWeight: 'bolder' }}>{p.name}</p>
+                                        <p class="text-center" style={{ fontSize: '14px',fontWeight: 'bolder' }}>{p.name}</p>
                                       
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Public year : {p.publicdate}</p>
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Category : {p.category}</p>
