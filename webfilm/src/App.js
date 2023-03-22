@@ -7,7 +7,7 @@ import Detail from './components/Detail';
 import Search from './components/Search';
 import Login from "./components/Login";
 import Register from "./components/Register.js";
-
+import DetailComment from "./components/DetailComment.js";
 import './App.css';
 import Navbar from './components/Navbar';
 import { useState, createContext, useEffect } from 'react';
@@ -39,7 +39,7 @@ function App() {
             <Route path="/films/:catename" element={<Films />}></Route>
             <Route path="/detail/:catename/:id" element={<Detail />}></Route>
             <Route path="/search/:searchval" element={<Search />}></Route>
-
+            <Route path="/detail/:catename/:id/:email" element={<DetailComment />}></Route>
           </Routes>
         </Router>
 
