@@ -5,14 +5,14 @@ import { createBrowserHistory } from 'history';
 
 
 function Films() {
-
-
-
+    const {status, setStatus} = useContext(UserContent)
+    console.log(status);
     const navigate = useNavigate()
     const history = createBrowserHistory();
     const { allfilms } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
-   
+    console.log(allfilms);
+    
 
     const { catename } = useParams();
     const { filteredFilm } = useContext(UserContent)
@@ -40,6 +40,7 @@ function Films() {
     }, []);
 
 
+    
 
     const filter = (name) => {
 
@@ -48,7 +49,9 @@ function Films() {
     }
 
 
-   
+
+
+
 
     return (
 
@@ -56,14 +59,14 @@ function Films() {
 
         <div class="row mb-5">
 
-         
+           
 
             <div class="col-2 card ">
                 <h2 class='btn btn-success mt-5 mb-2' onClick={() => filter("all")}>All</h2>
                 <div class="row justify-content-center">
       
                     {CatenameID.map((category) => (
-                        <div class="col-7 mb-4">
+                        <div class="col-8 mb-4 ">
                             <div class='btn btn-outline-success col-12' onClick={() => filter(category)}>{category}</div>
                         </div>
                     ))}
@@ -77,14 +80,14 @@ function Films() {
                         <div class="row">
                             {filteredFilm.map((p) => (
                                 <div class="col-3 border-3  mb-5" style={{ width: '150x', height: '400px' }}>
-                                    <li class="card btn" onClick={()=> navigate(`/detail/${p.category}/${p.id}`)}>
+                                    <li class="card btn" onClick={() => navigate(`/detail/${p.category}/${p.id}`)}>
                                         <img  src={require(`./images/${p.img}`)} width='100%' height={'200px'} alt="" />
                                         <br/>
-                                        <p class="text-center" style={{ fontSize: '15px',fontWeight: 'bolder' }}>{p.name}</p>
+                                        <p class="text-center" style={{ fontSize: '14px',fontWeight: 'bolder' }}>{p.name}</p>
                                       
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Public year : {p.publicdate}</p>
                                         <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Category : {p.category}</p>
-                                        <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Vote Rate : {p.mark}</p>
+                                        <p style={{ fontSize: '12px',fontWeight: 'bolder'  }}>Vote Rate : {parseFloat(JSON.parse(localStorage.getItem(`${p.id}`)))  ? (parseFloat(JSON.parse(localStorage.getItem(`${p.id}`))).toFixed(1)) : "0" }</p>
                                         <p class="btn btn-success" style={{ fontSize: '12px',fontWeight: 'bolder'  }}>VOTE</p>
                                     </li>
                                 </div>
