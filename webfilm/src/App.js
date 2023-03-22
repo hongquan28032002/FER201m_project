@@ -17,6 +17,17 @@ function App() {
 
 
   const [allfilms, setAllfilms] = useState(data)
+  const filmm = {
+    id: 17,
+    img: "image001_11.jpg",
+    category: "Action",
+    description: "'Spider-Man: No Way Home' follows Peter Parker as he navigates a multiverse filled with familiar villains and alternate Spider-Men.",
+    name: "Spiderman noway home",
+    publicdate: 2021,
+    mark: "",
+    comments: []
+}
+   data.push(filmm)
   const [filteredFilm, setFilteredFilm] = useState([]);
   
 
