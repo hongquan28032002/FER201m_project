@@ -83,13 +83,14 @@ export default function Detail() {
       const marksBySameId = comments.filter(c => c.idfilm === id);
       const sum = marksBySameId.reduce((sum, comment) => sum + parseFloat(comment.mark), 0);
       const average = parseFloat(sum / marksBySameId.length);
-      setAverage(average)
+      setAverage(average);
       localStorage.setItem(`${id}`, JSON.stringify(average));
       window.location.href = `/detail/${catename}/${id}`
     }
   }
 
-  const list = JSON.parse(localStorage.getItem("comments"));
+  const list = JSON.parse(localStorage.getItem("comments") ) || [];
+  
   const commentslist = list.filter(f => f.idfilm === id);
   console.log(commentslist);
 
@@ -104,7 +105,7 @@ export default function Detail() {
 
 
 
-  const listnwew = JSON.parse(localStorage.getItem("comments"));
+  const listnwew = JSON.parse(localStorage.getItem("comments")) || [];
   const [userFilter, setUserFilter] = useState({
     name: "",
     email: "",
