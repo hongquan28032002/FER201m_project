@@ -5,22 +5,12 @@ import { createBrowserHistory } from 'history';
 
 
 function Search() {
-    // const [average, setAverage] = useState(0)
+
     const navigate = useNavigate()
     const history = createBrowserHistory();
     const { allfilms } = useContext(UserContent)
     const { setAllfilms } = useContext(UserContent)
-    // console.log(allfilms);
-
-
-    // let averageValue = 0;
-    // if(localStorage.getItem(`${id}`)){
-    //  averageValue = parseFloat(JSON.parse(localStorage.getItem(`${id}`)).toFixed(1));
-    
-    // }else{
-    //   averageValue = 0
-    // }
-
+   
 
 
 
