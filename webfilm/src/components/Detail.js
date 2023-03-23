@@ -48,6 +48,8 @@ export default function Detail() {
 
 
 
+
+  ///ADD COMMENT TO LOCALSTORAGE  
   const handleComment = (e) => {
     e.preventDefault()
 
@@ -61,7 +63,7 @@ export default function Detail() {
     const comment = e.target.comment.value;
     console.log(mark);
     console.log(comment);
-    if (parseFloat(mark) < 0 || parseFloat(mark) > 10 || !mark || isNaN(mark)) {
+    if (parseFloat(mark) < 0 || parseFloat(mark) > 10 || !mark.trim() || isNaN(mark)) {
       alert('Please input mark from 0 to 10 !')
     } else {
       let markfloat = parseFloat(mark);
@@ -89,11 +91,14 @@ export default function Detail() {
     }
   }
 
-  const list = JSON.parse(localStorage.getItem("comments") ) || [];
-  
+
+  ///lay comment tren localstorage de display ra man hinh
+  const list = JSON.parse(localStorage.getItem("comments")) || [];
+
   const commentslist = list.filter(f => f.idfilm === id);
   console.log(commentslist);
 
+  //lay ra value cua average
   let averageValue = 0;
   const storedValue = localStorage.getItem(`${id}`);
   if (storedValue && !isNaN(parseFloat(storedValue))) {
@@ -105,6 +110,8 @@ export default function Detail() {
 
 
 
+
+  ///tim ra comment va danh gia diem cua 1 nguoi toi  1 bai viet
   const listnwew = JSON.parse(localStorage.getItem("comments")) || [];
   const [userFilter, setUserFilter] = useState({
     name: "",

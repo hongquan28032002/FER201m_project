@@ -42,7 +42,7 @@ function Navbar() {
     const handleSearch = (e) => {
         e.preventDefault()
         const searchVal = searchinput.current.value;
-        if (!searchVal) {
+        if (!(searchVal.trim())) {
             alert("Please enter a valid search");
         } else if (searchVal) {
             window.location.href = `/search/${searchVal}`
